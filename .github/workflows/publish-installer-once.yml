@@ -1,0 +1,29 @@
+name: Publish v1.0.0 installer
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      INSTALLER_NAME: "空间都去哪了 Install v1.0.0.exe"
+      OLD_URL: "https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v1.0.0/Install.v1.0.0.exe"
+      DOWNLOAD_URL: "https://github.com/Jasper1725/dir-size-explorer-downloads/raw/refs/heads/main/packages/v1.0.0/%E7%A9%BA%E9%97%B4%E9%83%BD%E5%8E%BB%E5%93%AA%E4%BA%86%20Install%20v1.0.0.exe"
+    steps:
+      - name: Publish verified installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone "https://github.com/$GITHUB_REPOSITORY.git" repo
+          cd repo
+          mkdir -p packages/v1.0.0
+          curl --fail --location --retry 3 "$OLD_URL" --output "packages/v1.0.0/$INSTALLER_NAME"
+          printf '%s  %s\n' '72ad1869cc86dd01847dfe786393b673415cf91ac6c2027d80bdee72e4e76a1d' "packages/v1.0.0/$INSTALLER_NAME" | sha256sum --check -
+          python3 -c 'import os,pathlib; p=pathlib.Path("README.md"); s=p.read_text(); assert os.environ["OLD_URL"] in s; p.write_text(s.replace(os.environ["OLD_URL"],os.environ["DOWNLOAD_URL"]))'
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md "packages/v1.0.0/$INSTALLER_NAME"
+          git commit -m '更新 v1.0.0 安装包下载，保留完整中文文件名'
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c http.extraHeader="AUTHORIZATION: basic $auth" push origin main
