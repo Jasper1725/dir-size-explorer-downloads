@@ -9,11 +9,12 @@
 | 版本 | 更新时间 | 主要变化 | 下载 |
 |---|---|---|---|
 | [v1.0.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v1.0.0) | 2026-10-20 | 扫描与界面改进、文件操作、资源管理器同步 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v1.0.0/Install.v1.0.0.exe) |
+| v0.3.2 | 2026-08-17 | 历史版本 | — |
 | [v0.3.1](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.3.1) | 2026-08-16 | 扫描稳定性与空间统计改进 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.3.1/Install.v0.3.1.exe) |
-| [v0.3.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.3.0) | 2026-08-16 | 扫描调度、系统信息与界面改进 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.3.0/Install.v0.3.0.exe) |
-| [v0.2.1](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.2.1) | 2026-08-16 | 安装向导改进 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.2.1/Install.v0.2.1.exe) |
-| [v0.2.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.2.0) | 2026-08-16 | 界面与功能扩展 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.2.0/Install.v0.2.0.exe) |
-| [v0.1.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.1.0) | 2026-08-16 | 首个版本 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.1.0/Install.v0.1.0.exe) |
+| [v0.3.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.3.0) | 2026-08-15 | 扫描调度、系统信息与界面改进 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.3.0/Install.v0.3.0.exe) |
+| [v0.2.1](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.2.1) | 2026-08-15 | 安装向导改进 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.2.1/Install.v0.2.1.exe) |
+| [v0.2.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.2.0) | 2026-08-15 | 界面与功能扩展 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.2.0/Install.v0.2.0.exe) |
+| [v0.1.0](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/tag/v0.1.0) | 2026-08-15 | 首个版本 | [安装包](https://github.com/Jasper1725/dir-size-explorer-downloads/releases/download/v0.1.0/Install.v0.1.0.exe) |
 
 各版本的更新内容见对应 Release 页面。
 
