@@ -1,0 +1,29 @@
+name: Publish v1.1.1 installer
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      INSTALLER_NAME: "空间都去哪了 Install v1.1.1.exe"
+    steps:
+      - name: Publish verified installer
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth=1 --single-branch "https://github.com/$GITHUB_REPOSITORY.git" repo
+          cd repo
+          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test ! -e packages/v1.1.1
+          mkdir -p packages/v1.1.1
+          gh api "repos/$GITHUB_REPOSITORY/releases/assets/672399905" -H 'Accept: application/octet-stream' > "packages/v1.1.1/$INSTALLER_NAME"
+          printf '%s  %s\n' 'f57e0ba7484f9b9a0d540ca82b188549c92c4a68bcd5bf4d135d26e318fa278b' "packages/v1.1.1/$INSTALLER_NAME" | sha256sum --check -
+          printf '%s' '55So5paH5Lu25aS55qGG5Zu+5ZKM5aSn5bCP5o6S6KGM5p+l55yL56OB55uY56m66Ze05Y2g55So44CC5pSv5oyBIFdpbmRvd3MgMTAgLyAxMe+8iDY0IOS9je+8ieOAggoKIyMg54mI5pys5LiL6L29Cgp8IOeJiOacrCB8IOabtOaWsOaXtumXtCB8IOS4u+imgeWPmOWMliB8IOS4i+i9vSB8CnwtLS18LS0tfC0tLXwtLS18CnwgW3YxLjEuMV0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3JlbGVhc2VzL3RhZy92MS4xLjEpIHwgMjAyNi0xMC0yNCB8IOS8mOWMluaJq+aPj+mAu+i+ke+8jOS/ruWkjWJ1ZyB8IFvlronoo4XljIVdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yYXcvcmVmcy9oZWFkcy9tYWluL3BhY2thZ2VzL3YxLjEuMS8lRTclQTklQkElRTklOTclQjQlRTklODMlQkQlRTUlOEUlQkIlRTUlOTMlQUElRTQlQkElODYlMjBJbnN0YWxsJTIwdjEuMS4xLmV4ZSkgfAp8IFt2MS4xLjBdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yZWxlYXNlcy90YWcvdjEuMS4wKSB8IDIwMjYtMTAtMjEgfCDmlrDlop7ov5vnqIvkuI7lkK/liqjpobnnrqHnkIbjgIHnlLXph4/mmL7npLrvvJvkv67lpI3miavmj4/lrozmiJDnirbmgIEgfCBb5a6J6KOF5YyFXShodHRwczovL2dpdGh1Yi5jb20vSmFzcGVyMTcyNS9kaXItc2l6ZS1leHBsb3Jlci1kb3dubG9hZHMvcmF3L3JlZnMvaGVhZHMvbWFpbi9wYWNrYWdlcy92MS4xLjAvJUU3JUE5JUJBJUU5JTk3JUI0JUU5JTgzJUJEJUU1JThFJUJCJUU1JTkzJUFBJUU0JUJBJTg2JTIwSW5zdGFsbCUyMHYxLjEuMC5leGUpIHwKfCBbdjEuMC4wXShodHRwczovL2dpdGh1Yi5jb20vSmFzcGVyMTcyNS9kaXItc2l6ZS1leHBsb3Jlci1kb3dubG9hZHMvcmVsZWFzZXMvdGFnL3YxLjAuMCkgfCAyMDI2LTEwLTIxIHwg5omr5o+P5LiO55WM6Z2i5pS56L+b44CB5paH5Lu25pON5L2c44CB6LWE5rqQ566h55CG5Zmo5ZCM5q2l77yb5L+u5aSN5Yi35paw5Y+K5Y246L296Zeu6aKYIHwgW+WuieijheWMhV0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3Jhdy9yZWZzL2hlYWRzL21haW4vcGFja2FnZXMvdjEuMC4wLyVFNyVBOSVCQSVFOSU5NyVCNCVFOSU4MyVCRCVFNSU4RSVCQiVFNSU5MyVBQSVFNCVCQSU4NiUyMEluc3RhbGwlMjB2MS4wLjAuZXhlKSB8CnwgW3YwLjMuMV0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3JlbGVhc2VzL3RhZy92MC4zLjEpIHwgMjAyNi0wOC0xNiB8IOaJq+aPj+eos+WumuaAp+S4juepuumXtOe7n+iuoeaUuei/myB8IFvlronoo4XljIVdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yZWxlYXNlcy9kb3dubG9hZC92MC4zLjEvSW5zdGFsbC52MC4zLjEuZXhlKSB8CnwgW3YwLjMuMF0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3JlbGVhc2VzL3RhZy92MC4zLjApIHwgMjAyNi0wOC0xNSB8IOaJq+aPj+iwg+W6puOAgeezu+e7n+S/oeaBr+S4jueVjOmdouaUuei/myB8IFvlronoo4XljIVdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yZWxlYXNlcy9kb3dubG9hZC92MC4zLjAvSW5zdGFsbC52MC4zLjAuZXhlKSB8CnwgW3YwLjIuMV0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3JlbGVhc2VzL3RhZy92MC4yLjEpIHwgMjAyNi0wOC0xNSB8IOWuieijheWQkeWvvOaUuei/myB8IFvlronoo4XljIVdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yZWxlYXNlcy9kb3dubG9hZC92MC4yLjEvSW5zdGFsbC52MC4yLjEuZXhlKSB8CnwgW3YwLjIuMF0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3JlbGVhc2VzL3RhZy92MC4yLjApIHwgMjAyNi0wOC0xNSB8IOeVjOmdouS4juWKn+iDveaJqeWxlSB8IFvlronoo4XljIVdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yZWxlYXNlcy9kb3dubG9hZC92MC4yLjAvSW5zdGFsbC52MC4yLjAuZXhlKSB8CnwgW3YwLjEuMF0oaHR0cHM6Ly9naXRodWIuY29tL0phc3BlcjE3MjUvZGlyLXNpemUtZXhwbG9yZXItZG93bmxvYWRzL3JlbGVhc2VzL3RhZy92MC4xLjApIHwgMjAyNi0wOC0xNSB8IOmmluS4queJiOacrCB8IFvlronoo4XljIVdKGh0dHBzOi8vZ2l0aHViLmNvbS9KYXNwZXIxNzI1L2Rpci1zaXplLWV4cGxvcmVyLWRvd25sb2Fkcy9yZWxlYXNlcy9kb3dubG9hZC92MC4xLjAvSW5zdGFsbC52MC4xLjAuZXhlKSB8CgrlkITniYjmnKznmoTmm7TmlrDlhoXlrrnop4Hlr7nlupQgUmVsZWFzZSDpobXpnaLjgIIKCiMjIOWuieijheaWueazlQoKMS4g5LiL6L295LiK5pa55YiX6KGo5Lit55qE5a6J6KOF5YyF44CCCjIuIOS7peeuoeeQhuWRmOi6q+S7vei/kOihjOWuieijheWMhe+8jOi/m+WFpeWuieijheWQkeWvvOOAggozLiDmjInlkJHlr7zpgInmi6nlronoo4XkvY3nva7lkozlv6vmjbfmlrnlvI/vvIzlrozmiJDlronoo4XjgIIK' | base64 --decode > README.md
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add README.md "packages/v1.1.1/$INSTALLER_NAME"
+          git commit -m '发布 v1.1.1 安装包'
+          auth=$(printf 'x-access-token:%s' "$GH_TOKEN" | base64 -w0)
+          git -c http.extraHeader="AUTHORIZATION: basic $auth" push origin main
